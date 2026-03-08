@@ -2,72 +2,75 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>klowreez CS2</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
             background-color: #000000;
             color: #ffffff;
             font-family: 'Inter', sans-serif;
-            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 90%; /* Ограничиваем ширину, чтобы текст не прилипал к краям */
         }
 
         h1 {
-            font-size: clamp(2.5rem, 10vw, 8rem);
-            font-weight: 900;
+            /* Уменьшили мин и макс значения для комфорта на телефонах */
+            font-size: clamp(2.2rem, 8vw, 5rem);
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: -2px;
             text-align: center;
-            padding: 0 20px;
+            line-height: 0.9;
+            word-break: break-word; /* Чтобы длинные слова не вылезали за края */
         }
 
-        .social-bar {
-            margin-top: 40px;
-            display: flex;
-            gap: 50px;
+        .info-text {
+            color: #666666;
+            /* Шрифты чуть меньше, чтобы оставить воздух */
+            font-size: clamp(0.8rem, 3vw, 1rem);
+            margin-top: 12px;
+            font-weight: 400;
+            text-align: center;
         }
 
-        .icon {
-            font-size: clamp(1.5rem, 5vw, 3rem);
-            color: #ffffff;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            text-decoration: none;
-        }
-
-        .icon:hover {
-            transform: scale(1.2);
-            opacity: 0.7;
-        }
-
-        @media (max-height: 500px) {
-            .social-bar { margin-top: 20px; }
-            h1 { font-size: 3rem; }
+        footer {
+            margin-bottom: 20px;
+            color: #222222;
+            font-size: 0.7rem;
+            font-weight: 400;
+            user-select: none;
         }
     </style>
 </head>
 <body>
 
-    <h1>klowreez CS2</h1>
+    <main>
+        <h1>klowreez CS2</h1>
+        <p class="info-text">The first wave of invites will be on March 22nd at 19:00 CET</p>
+    </main>
 
-    <div class="social-bar">
-        <a href="https://t.me/klowreez" class="icon" aria-label="Telegram" target="_blank">
-            <i class="fab fa-telegram"></i>
-        </a>
-    </div>
+    <footer>
+        &copy; 2026 all rights reserved by e2wav
+    </footer>
 
-    <script>
-        console.log("Дизайн с Telegram готов");
-    </script>
 </body>
 </html>
