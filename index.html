@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>klowreez CS2</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 10vw, 8rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .social-bar {
+            margin-top: 40px;
+            display: flex;
+            gap: 50px;
+        }
+
+        .icon {
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            color: #ffffff;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            text-decoration: none;
+        }
+
+        .icon:hover {
+            transform: scale(1.2);
+            opacity: 0.7;
+        }
+
+        @media (max-height: 500px) {
+            .social-bar { margin-top: 20px; }
+            h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>klowreez CS2</h1>
+
+    <div class="social-bar">
+        <a href="https://t.me/klowreez" class="icon" aria-label="Telegram" target="_blank">
+            <i class="fab fa-telegram"></i>
+        </a>
+    </div>
+
+    <script>
+        console.log("Дизайн с Telegram готов");
+    </script>
+</body>
+</html>
