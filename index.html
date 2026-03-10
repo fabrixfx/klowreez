@@ -2,75 +2,94 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>klowreez CS2</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>klowreez.fun | Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #000000;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        :root {
+            --bg-color: #f0f0f2; /* Очень светлый серый фон страницы */
+            --glass-bg: rgba(255, 255, 255, 0.6); /* Белый, полупрозрачный для стекла */
+            --text-color: #111111; /* Почти черный текст */
+            --border-color: rgba(0, 0, 0, 0.08); /* Едва заметная темная рамка */
         }
 
-        main {
-            flex-grow: 1;
+        body {
+            margin: 0;
+            padding: 0;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 90%; /* Ограничиваем ширину, чтобы текст не прилипал к краям */
+            height: 100vh;
+            background-color: var(--bg-color);
+            /* Красивый градиент на фоне для глубины */
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(165, 204, 57, 0.15) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(0, 0, 0, 0.05) 0px, transparent 50%);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            overflow: hidden;
+        }
+
+        /* Центрированная карточка с эффектом блюра */
+        .glass-card {
+            background: var(--glass-bg);
+            /* Тот самый эффект матового стекла */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            
+            /* Плавное появление при загрузке */
+            animation: cardAppear 1s ease-out;
+            
+            /* Ограничим максимальную ширину */
+            max-width: 400px;
+            width: 90%;
         }
 
         h1 {
-            /* Уменьшили мин и макс значения для комфорта на телефонах */
-            font-size: clamp(2.2rem, 8vw, 5rem);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            text-align: center;
-            line-height: 0.9;
-            word-break: break-word; /* Чтобы длинные слова не вылезали за края */
+            font-size: 28px;
+            font-weight: 600;
+            margin: 0 0 10px 0;
+            letter-spacing: -1px;
         }
 
-        .info-text {
-            color: #666666;
-            /* Шрифты чуть меньше, чтобы оставить воздух */
-            font-size: clamp(0.8rem, 3vw, 1rem);
-            margin-top: 12px;
-            font-weight: 400;
-            text-align: center;
+        p {
+            font-size: 16px;
+            color: rgba(0, 0, 0, 0.6);
+            margin: 0 0 30px 0;
+            font-weight: 300;
         }
 
-        footer {
-            margin-bottom: 20px;
-            color: #222222;
-            font-size: 0.7rem;
-            font-weight: 400;
-            user-select: none;
+        /* Стили для картинки по центру */
+        .center-image {
+            max-width: 100%; /* Чтобы не вылезала за пределы */
+            height: auto;
+            border-radius: 12px; /* Мягкие углы у картинки */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            display: block;
+            margin: 0 auto; /* Центрирование */
+        }
+
+        /* Анимация появления */
+        @keyframes cardAppear {
+            from { opacity: 0; transform: scale(0.95) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <main>
-        <h1>klowreez CS2</h1>
-        <p class="info-text">The first wave of invites will be on March 22nd at 19:00 CET</p>
-    </main>
-
-    <footer>
-        &copy; 2026 all rights reserved by e2wav
-    </footer>
+    <div class="glass-card">
+        <h1>klowreez.fun</h1>
+        <p>хаххаахха</p>
+        
+        <img src="logo.png" alt="Dashboard Visual" class="center-image">
+    </div>
 
 </body>
 </html>
