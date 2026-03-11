@@ -9,7 +9,6 @@
         :root {
             --bg-color: #050505;
             --glass: rgba(255, 255, 255, 0.03);
-            --glass-hover: rgba(255, 255, 255, 0.08);
             --glass-border: rgba(255, 255, 255, 0.07);
         }
 
@@ -22,67 +21,63 @@
             align-items: center;
             min-height: 100vh;
             background-color: var(--bg-color);
-            /* Радиальный градиент для объема на фоне */
             background-image: radial-gradient(circle at 50% 50%, #111 0%, #050505 100%);
             font-family: 'Inter', sans-serif;
             color: white;
-            overflow: hidden; /* Запрет прокрутки */
+            overflow: hidden;
         }
 
-        /* Невидимый слой, который блокирует клики, но оставляет наведение */
+        /* Блокировщик кликов для всего, кроме ссылок */
         .click-blocker {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 999;
             cursor: default;
         }
 
-        /* Навигация */
         .nav {
             position: fixed;
             top: 25px;
             display: flex;
-            gap: 12px;
-            z-index: 100;
-            width: 90%;
-            justify-content: center;
+            gap: 15px;
+            z-index: 1000; /* Выше блокировщика */
+            align-items: center;
         }
 
         .nav-item {
             background: var(--glass);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            padding: 10px 20px;
+            padding: 10px 18px;
             border-radius: 100px;
             border: 1px solid var(--glass-border);
             color: rgba(255, 255, 255, 0.4);
             font-size: 13px;
-            font-weight: 400;
-            transition: all 0.3s ease;
-            white-space: nowrap;
             user-select: none;
+            transition: all 0.3s ease;
+            pointer-events: none; /* Кнопки не кликаются */
         }
 
-        /* Эффект при наведении на "Смешные картинки" (Тряска) */
-        .nav-item:first-child:hover {
-            color: #fff;
-            border-color: rgba(255, 255, 255, 0.3);
-            animation: shake 0.2s infinite;
+        /* Анимации наведения для кнопок (всё еще работают через прозрачность нава) */
+        .nav:hover .nav-item.funny:hover { color: #fff; animation: shake 0.2s infinite; }
+        .nav:hover .nav-item.buy:hover { color: #ff4d4d; border-color: #ff4d4d; transform: scale(1.08); }
+
+        /* CHANGELOG как текстовая ссылка */
+        .changelog-link {
+            color: rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            font-size: 12px;
+            transition: 0.3s;
+            pointer-events: auto; /* РАЗРЕШАЕМ КЛИК */
+            cursor: pointer;
+            margin-left: 5px;
         }
 
-        /* Эффект при наведении на "Приобрести гамно" (Красное свечение) */
-        .nav-item:last-child:hover {
-            background: rgba(255, 77, 77, 0.1);
-            color: #ff4d4d;
-            border-color: #ff4d4d;
-            box-shadow: 0 0 20px rgba(255, 77, 77, 0.2);
-            transform: scale(1.08);
+        .changelog-link:hover {
+            color: #0088cc;
+            text-decoration: underline;
         }
 
-        /* Карточка */
         .card {
             background: var(--glass);
             backdrop-filter: blur(40px);
@@ -95,8 +90,6 @@
             width: 85%;
             box-shadow: 0 50px 100px rgba(0,0,0,0.8);
             animation: cardAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            z-index: 10;
         }
 
         h1 {
@@ -117,21 +110,13 @@
             text-transform: uppercase;
         }
 
-        /* Картинка по центру */
         .main-img {
             width: 100%;
             height: auto;
             border-radius: 16px;
             border: 1px solid var(--glass-border);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            transition: transform 0.6s ease;
         }
 
-        .main-img:hover {
-            transform: scale(1.02);
-        }
-
-        /* Анимации */
         @keyframes shake {
             0% { transform: translate(1px, 1px) rotate(0deg); }
             25% { transform: translate(-1px, -1px) rotate(-0.5deg); }
@@ -145,22 +130,10 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Мобильная адаптация */
         @media (max-width: 480px) {
-            .nav { top: 20px; gap: 8px; }
-            .nav-item { padding: 9px 15px; font-size: 11px; }
-            .card { padding: 25px; width: 88%; margin-top: 40px; }
-            h1 { letter-spacing: -1px; }
-            .desc { letter-spacing: 1px; font-size: 10px; }
-        }
-
-        /* Фоновый декор (точки) */
-        .bg-dots {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 30px 30px;
-            z-index: -1;
+            .nav { flex-direction: column; top: 10px; gap: 5px; }
+            .nav-item { padding: 6px 12px; font-size: 10px; }
+            .card { margin-top: 80px; }
         }
     </style>
 </head>
@@ -168,17 +141,15 @@
 
     <div class="click-blocker"></div>
 
-    <div class="bg-dots"></div>
-
     <nav class="nav">
-        <div class="nav-item">Смешные картинки</div>
-        <div class="nav-item">Приобрести гамно</div>
+        <div class="nav-item funny">Смешные картинки</div>
+        <div class="nav-item buy">Приобрести гамно</div>
+        <a href="https://t.me/vibrossklow" target="_blank" class="changelog-link">Changelog</a>
     </nav>
 
     <div class="card">
         <h1>klowreez.fun</h1>
-        <div class="desc">Картинка обновляется раз в никогда нах</div>
-        
+        <div class="desc">Картинка обновляется раз в никогда</div>
         <img src="logo1.png" alt="content loading..." class="main-img">
     </div>
 
