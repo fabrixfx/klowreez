@@ -3,92 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>klowreez.fun | Welcome</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>klowreez.fun</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f0f0f2; /* Очень светлый серый фон страницы */
-            --glass-bg: rgba(255, 255, 255, 0.6); /* Белый, полупрозрачный для стекла */
-            --text-color: #111111; /* Почти черный текст */
-            --border-color: rgba(0, 0, 0, 0.08); /* Едва заметная темная рамка */
+            --bg-color: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-hover: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.07);
         }
 
         body {
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             background-color: var(--bg-color);
-            /* Красивый градиент на фоне для глубины */
-            background-image: 
-                radial-gradient(at 10% 10%, rgba(165, 204, 57, 0.15) 0px, transparent 50%),
-                radial-gradient(at 90% 90%, rgba(0, 0, 0, 0.05) 0px, transparent 50%);
+            background-image: radial-gradient(circle at 50% 50%, #111 0%, #050505 100%);
             font-family: 'Inter', sans-serif;
-            color: var(--text-color);
-            overflow: hidden;
+            color: white;
+            overflow-x: hidden;
         }
 
-        /* Центрированная карточка с эффектом блюра */
-        .glass-card {
-            background: var(--glass-bg);
-            /* Тот самый эффект матового стекла */
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            
-            padding: 40px;
-            border-radius: 24px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            
-            /* Плавное появление при загрузке */
-            animation: cardAppear 1s ease-out;
-            
-            /* Ограничим максимальную ширину */
-            max-width: 400px;
+        /* Навигация */
+        .nav {
+            position: fixed;
+            top: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
             width: 90%;
+            justify-content: center;
+        }
+
+        .nav-item {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 10px 18px;
+            border-radius: 100px;
+            border: 1px solid var(--glass-border);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 12px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            white-space: nowrap;
+        }
+
+        .nav-item:hover {
+            background: var(--glass-hover);
+            color: #fff;
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Карточка */
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            padding: 30px;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+            max-width: 420px;
+            width: 85%;
+            margin-top: 60px; /* Отступ от нава на мобилах */
+            box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+            animation: cardFade 1.2s ease;
         }
 
         h1 {
-            font-size: 28px;
-            font-weight: 600;
-            margin: 0 0 10px 0;
-            letter-spacing: -1px;
+            font-size: clamp(32px, 8vw, 42px); /* Адаптивный размер шрифта */
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -2px;
+            background: linear-gradient(to bottom, #fff 40%, #444 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        p {
-            font-size: 16px;
-            color: rgba(0, 0, 0, 0.6);
-            margin: 0 0 30px 0;
-            font-weight: 300;
+        .desc {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.2);
+            margin: 10px 0 25px 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        /* Стили для картинки по центру */
-        .center-image {
-            max-width: 100%; /* Чтобы не вылезала за пределы */
+        .main-img {
+            width: 100%;
             height: auto;
-            border-radius: 12px; /* Мягкие углы у картинки */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            display: block;
-            margin: 0 auto; /* Центрирование */
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* Анимация появления */
-        @keyframes cardAppear {
-            from { opacity: 0; transform: scale(0.95) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
+        /* Невидимый блок кликов */
+        .click-blocker {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 101;
+        }
+
+        /* Адаптация для мобильных устройств */
+        @media (max-width: 480px) {
+            .nav {
+                top: 15px;
+                gap: 8px;
+            }
+            .nav-item {
+                padding: 8px 12px;
+                font-size: 10px;
+            }
+            .card {
+                padding: 20px;
+                width: 88%;
+            }
+            h1 {
+                letter-spacing: -1px;
+            }
+        }
+
+        @keyframes cardFade {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <div class="glass-card">
+    <div class="click-blocker"></div>
+
+    <nav class="nav">
+        <div class="nav-item">Смешные картинки</div>
+        <div class="nav-item">Приобрести гамно</div>
+    </nav>
+
+    <div class="card">
         <h1>klowreez.fun</h1>
-        <p>хаххаахха</p>
+        <div class="desc">10006</div>
         
-        <img src="logo.png" alt="Dashboard Visual" class="center-image">
+        <img src="logo.png" alt="image not found" class="main-img">
     </div>
 
 </body>
